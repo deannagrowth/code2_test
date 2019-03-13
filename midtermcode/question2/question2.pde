@@ -31,8 +31,13 @@ class Object{
     mouse.normalize();
     vel.limit(4); 
     
+
+    
     //basic movement vector addition here...
-    translate(mouseX - 50, mouseY - 50); //allows the ellipse to follow mouse
+    vel.add(accel);
+    pos.add(vel);
+    //translate(mouseX - 50, mouseY - 50); //changes origin point of entire sketch
+    //line(0,0,mouse.x,mouse.y); 
     
   }
   
@@ -45,7 +50,17 @@ class Object{
   void checkBoundaries(){
     //add logic here so when the ellipse gets to the edge of the 
     //it is positioned on the opposite side
-    ellipseMode(CENTER);  // Set ellipseMode to CENTER
-    ellipse(50, 50, 30, 30);  // Draw gray ellipse using CENTER mode
+if (pos.x > width) {
+      pos.x = 0;
+    } else if (pos.x < 0) {
+      pos.x = width;
+    }
+    
+    if (pos.y > height) {
+     pos.y = 0;
+    } else if (pos.y < 0) {
+     pos.y = height;
+    }
+
   }
 }
